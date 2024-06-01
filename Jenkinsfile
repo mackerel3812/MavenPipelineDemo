@@ -8,11 +8,17 @@ pipeline {
     stages {
         stage('Build') {
             steps {
-                echo 'Hello World!!'
                 checkout scmGit(branches: [[name: '*/main']], extensions: [], userRemoteConfigs: [[credentialsId: 'MyGitHub', url: 'https://github.com/mackerel3812/MavenPipelineDemo.git']])
-                sh "mvn -Dmaven.test.failure.ignore=true clean package"
+            	sh "mvn clean package"
             }
         }
+        stage('Test') {
+            steps {
+				sh 'mvn test'
+                junit 'target/surefire-reports/*.xml'
+            }
+        }
+
     }
     post {
         always {
