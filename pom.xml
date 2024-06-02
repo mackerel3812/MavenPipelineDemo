@@ -74,6 +74,34 @@
             <artifactId>sonar-maven-plugin</artifactId>
             <version>3.7.0.1746</version>
         </plugin>
+        <plugin>
+          <groupId>org.apache.maven.plugins</groupId>
+          <artifactId>maven-checkstyle-plugin</artifactId>
+          <version>3.0.0</version>
+          <dependencies>
+          <dependency>
+            <groupId>com.puppycrawl.tools</groupId>
+            <artifactId>checkstyle</artifactId>
+            <version>8.17</version>
+          </dependency>
+        </dependencies>
+        <configuration>
+          <configLocation>google_checks.xml</configLocation>
+          <failsOnError>true</failsOnError>
+          <failOnViolation>true</failOnViolation>
+          <violationSeverity>error</violationSeverity>
+          <consoleOutput>true</consoleOutput>
+        </configuration>
+        <executions>
+          <execution>
+            <id>checkstyle</id>
+            <phase>verify</phase>
+              <goals>
+                <goal>check</goal>
+              </goals>
+            </execution>
+          </executions>
+        </plugin>
       </plugins>
     </pluginManagement>
   </build>

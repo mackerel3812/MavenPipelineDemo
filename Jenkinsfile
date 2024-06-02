@@ -12,6 +12,12 @@ pipeline {
             	sh "mvn clean package"
             }
         }
+        stage('Checkstyle') {
+            steps {
+                // Mavenを使用してCheckstyleを実行する
+                sh 'mvn checkstyle:checkstyle'
+            }
+        }
         stage('SonarQube Analysis') {
             steps {
                 withSonarQubeEnv('SonarQube_server'){
