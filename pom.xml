@@ -69,41 +69,54 @@
           <artifactId>maven-project-info-reports-plugin</artifactId>
           <version>3.0.0</version>
         </plugin>
+        <!-- PMD Plugin -->
+        <plugin>
+            <groupId>org.apache.maven.plugins</groupId>
+            <artifactId>maven-pmd-plugin</artifactId>
+            <version>3.13.0</version>
+            <configuration>
+                <linkXref>true</linkXref>
+                <sourceEncoding>utf-8</sourceEncoding>
+                <minimumTokens>100</minimumTokens>
+                <format>xml</format>
+                <outputDirectory>target/pmd/</outputDirectory>
+                <targetDirectory>target/pmd/</targetDirectory>
+            </configuration>
+            <executions>
+                <execution>
+                    <phase>validate</phase>
+                    <goals>
+                        <goal>pmd</goal>
+                    </goals>
+                </execution>
+            </executions>
+        </plugin>
+        <!-- Checkstyle Plugin -->
+        <plugin>
+            <groupId>org.apache.maven.plugins</groupId>
+            <artifactId>maven-checkstyle-plugin</artifactId>
+            <version>3.1.1</version>
+            <configuration>
+                <configLocation>checkstyle.xml</configLocation>
+                <encoding>UTF-8</encoding>
+                <outputFile>target/checkstyle-result.xml</outputFile>
+                <outputDirectory>target/checkstyle/</outputDirectory>
+                <failsOnError>true</failsOnError>
+            </configuration>
+            <executions>
+                <execution>
+                    <id>checkstyle</id>
+                    <phase>validate</phase>
+                    <goals>
+                        <goal>checkstyle</goal>
+                    </goals>
+                </execution>
+            </executions>
+        </plugin>
         <plugin>
             <groupId>org.sonarsource.scanner.maven</groupId>
             <artifactId>sonar-maven-plugin</artifactId>
             <version>3.7.0.1746</version>
-        </plugin>
-        <plugin>
-          <groupId>org.apache.maven.plugins</groupId>
-          <artifactId>maven-pmd-plugin</artifactId>
-          <version>3.13.0</version> <!-- Maven PMD Pluginのバージョン -->
-          <configuration>
-            <linkXref>true</linkXref>
-            <sourceEncoding>utf-8</sourceEncoding>
-            <minimumTokens>100</minimumTokens>
-            <format>xml</format>
-            <outputDirectory>reports/pmd/</outputDirectory>
-            <targetDirectory>reports/pmd/</targetDirectory>
-          </configuration>
-          <executions>
-            <execution>
-              <phase>validate</phase>
-              <goals>
-                <goal>pmd</goal>
-              </goals>
-            </execution>
-          </executions>
-        </plugin>
-        <plugin>
-          <groupId>org.apache.maven.plugins</groupId>
-          <artifactId>maven-checkstyle-plugin</artifactId>
-          <version>3.1.1</version>
-        <configuration>
-          <configLocation>UTF-8</configLocation>
-          <failsOnError>false</failsOnError>
-          <outputFile>reports/checkstyle.xml</outputFile>
-        </configuration>
         </plugin>
       </plugins>
     </pluginManagement>
