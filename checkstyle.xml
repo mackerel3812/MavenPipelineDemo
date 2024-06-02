@@ -3,11 +3,13 @@
     "https://checkstyle.org/dtds/configuration_1_3.dtd">
 
 <module name="Checker">
+    <!-- FileTabCharacter should be outside of TreeWalker -->
+    <module name="FileTabCharacter"/>
+    
     <module name="TreeWalker">
         <module name="JavadocMethod"/>
         <module name="MagicNumber"/>
         <module name="TodoComment"/>
-        <module name="FileTabCharacter"/>
         <module name="LineLength"/>
     </module>
 </module>
