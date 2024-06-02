@@ -35,10 +35,20 @@ pipeline {
     }
     post {
         always {
-            junit(
-                allowEmptyResults:true,
-                testResults: '*test-reports/.xml'
-                )
+            // Checkstyleレポートを生成し、Jenkinsに結果を提供する
+            junit allowEmptyResults: true, testResults: '**/target/surefire-reports/*.xml'
+            // PMDレポートをJenkinsに公開
+            pmd canComputeNew: true, pattern: '**/target/pmd/pmd.xml'
+            // CheckstyleレポートをJenkinsに公開
+            checkstyle canComputeNew: true, pattern: '**/target/checkstyle-result.xml'
+        }
+        success {
+            // ビルドが成功した場合に実行するステップを記述する
+            echo 'Build succeeded!'
+        }
+        failure {
+            // ビルドが失敗した場合に実行するステップを記述する
+            echo 'Build failed!'
         }
     }
 }
