@@ -12,12 +12,6 @@ pipeline {
             	sh "mvn clean package"
             }
         }
-        stage('PMD Analysis') {
-            steps {
-                // Mavenを使用してPMDを実行する
-                sh 'mvn pmd:pmd'
-            }
-        }
         stage('Checkstyle Analysis') {
             steps {
                 // Mavenを使用してCheckstyleを実行する
