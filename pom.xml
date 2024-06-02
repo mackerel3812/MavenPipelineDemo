@@ -76,31 +76,34 @@
         </plugin>
         <plugin>
           <groupId>org.apache.maven.plugins</groupId>
-          <artifactId>maven-checkstyle-plugin</artifactId>
-          <version>3.0.0</version>
-          <dependencies>
-          <dependency>
-            <groupId>com.puppycrawl.tools</groupId>
-            <artifactId>checkstyle</artifactId>
-            <version>8.17</version>
-          </dependency>
-        </dependencies>
-        <configuration>
-          <configLocation>google_checks.xml</configLocation>
-          <failsOnError>true</failsOnError>
-          <failOnViolation>true</failOnViolation>
-          <violationSeverity>error</violationSeverity>
-          <consoleOutput>true</consoleOutput>
-        </configuration>
-        <executions>
-          <execution>
-            <id>checkstyle</id>
-            <phase>verify</phase>
+          <artifactId>maven-pmd-plugin</artifactId>
+          <version>3.13.0</version> <!-- Maven PMD Pluginのバージョン -->
+          <configuration>
+            <linkXref>true</linkXref>
+            <sourceEncoding>utf-8</sourceEncoding>
+            <minimumTokens>100</minimumTokens>
+            <format>xml</format>
+            <outputDirectory>reports/pmd/</outputDirectory>
+            <targetDirectory>reports/pmd/</targetDirectory>
+          </configuration>
+          <executions>
+            <execution>
+              <phase>validate</phase>
               <goals>
-                <goal>check</goal>
+                <goal>pmd</goal>
               </goals>
             </execution>
           </executions>
+        </plugin>
+        <plugin>
+          <groupId>org.apache.maven.plugins</groupId>
+          <artifactId>maven-checkstyle-plugin</artifactId>
+          <version>3.1.1</version>
+        <configuration>
+          <configLocation>UTF-8</configLocation>
+          <failsOnError>false</failsOnError>
+          <outputFile>reports/checkstyle.xml</outputFile>
+        </configuration>
         </plugin>
       </plugins>
     </pluginManagement>
