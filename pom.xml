@@ -130,7 +130,7 @@
                     <image>openjdk:11-jre-slim</image>
                 </from>
                 <to>
-                    <image>${aws.account.id}.dkr.ecr.${aws.region}.amazonaws.com/${ecr.repo.name}</image>
+                    <image>${aws.account.id}.dkr.ecr.${aws.region}.amazonaws.com/${ecr.repo.name}:${project.version}</image>
                     <auth>
                         <username>AWS</username>
                         <password>${env.AWS_ECR_PASSWORD}</password>
