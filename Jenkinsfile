@@ -18,13 +18,13 @@ pipeline {
         //         sh 'mvn checkstyle:checkstyle'
         //     }
         // }
-        stage('SonarQube Analysis') {
-            steps {
-                withSonarQubeEnv('SonarQube_server'){
-                    sh "mvn sonar:sonar"
-                }
-            }
-        }
+        // stage('SonarQube Analysis') {
+        //     steps {
+        //         withSonarQubeEnv('SonarQube_server'){
+        //             sh "mvn sonar:sonar"
+        //         }
+        //     }
+        // }
         stage('Test') {
             steps {
 				sh 'mvn test'
