@@ -118,9 +118,36 @@
             <artifactId>sonar-maven-plugin</artifactId>
             <version>3.7.0.1746</version>
         </plugin>
+        <plugin>
+            <groupId>com.google.cloud.tools</groupId>
+            <artifactId>jib-maven-plugin</artifactId>
+            <version>3.1.4</version>
+            <configuration>
+                <from>
+                    <image>openjdk:11-jre-slim</image>
+                </from>
+                <to>
+                    <image>${aws.account.id}.dkr.ecr.${aws.region}.amazonaws.com/${ecr.repo.name}</image>
+                    <auth>
+                        <username>AWS</username>
+                        <password>${env.AWS_ECR_PASSWORD}</password>
+                    </auth>
+                </to>
+                <container>
+                    <ports>
+                        <port>8080</port>
+                    </ports>
+                </container>
+            </configuration>
+        </plugin>
       </plugins>
     </pluginManagement>
   </build>
+  <properties>
+      <aws.account.id>590183987209</aws.account.id>
+      <aws.region>ap-northeast-1</aws.region>
+      <ecr.repo.name>testecr12</ecr.repo.name>
+  </properties>
   <profiles>
     <profile>
         <id>sonar</id>
@@ -135,4 +162,5 @@
         </properties>
     </profile>
   </profiles>
+
 </project>

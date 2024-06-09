@@ -4,6 +4,12 @@ pipeline {
     tools{
         maven 'MAVEN'        
     }
+    environment {
+        AWS_REGION = 'ap-northeast-1'  // 使用するAWSリージョン
+        ECR_REPO_NAME = 'testecr12'
+        AWS_ACCOUNT_ID = '590183987209'
+        IMAGE_NAME = 'test-image'
+    }
 
     stages {
         stage('Build') {
@@ -29,6 +35,20 @@ pipeline {
             steps {
 				sh 'mvn test'
                 junit 'target/surefire-reports/*.xml'
+            }
+        }
+        stage('Setup AWS Credentials') {
+            steps {
+                script {
+                    // AWS ECRのログインパスワードを環境変数に設定
+                    env.AWS_ECR_PASSWORD = sh(script: "aws ecr get-login-password --region $AWS_REGION", returnStdout: true).trim()
+                }
+            }
+        }
+        stage('Build and Push Docker Image') {
+            steps {
+                // MavenのJibプラグインを使用してイメージをビルドし、ECRにプッシュ
+                sh 'mvn compile com.google.cloud.tools:jib-maven-plugin:build -Daws.account.id=$AWS_ACCOUNT_ID -Daws.region=$AWS_REGION -Decr.repo.name=$ECR_REPO_NAME'
             }
         }
 
