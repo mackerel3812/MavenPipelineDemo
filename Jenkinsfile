@@ -41,7 +41,7 @@ pipeline {
             steps {
                 script {
                     // Jenkinsの認証情報ストアからAWS認証情報を取得
-                    withCredentials([[$class: 'AmazonWebServicesCredentialsBinding', credentialsId: 'aws-credentials']]) {
+                    withCredentials([[$class: 'AmazonWebServicesCredentialsBinding', credentialsId: 'MyAWS']]) {
                         // AWS CLIを使用してECRのログインパスワードを環境変数に設定
                         env.AWS_ECR_PASSWORD = sh(script: "aws ecr get-login-password --region $AWS_REGION", returnStdout: true).trim()
                     }
