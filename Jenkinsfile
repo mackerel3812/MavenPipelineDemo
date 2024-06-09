@@ -68,7 +68,7 @@ pipeline {
         }
         failure {
             // ビルドが失敗した場合に実行するステップを記述する
-            echo 'Build failed!!?'
+            echo 'Build failed!!?!'
         }
     }
 }
