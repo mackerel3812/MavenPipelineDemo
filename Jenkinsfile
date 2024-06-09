@@ -67,7 +67,7 @@ pipeline {
         }
         success {
             // ビルドが成功した場合に実行するステップを記述する
-            echo 'Build succeeded!!'
+            echo 'Build succeeded!!!'
         }
         failure {
             // ビルドが失敗した場合に実行するステップを記述する
